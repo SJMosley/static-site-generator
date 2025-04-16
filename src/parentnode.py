@@ -16,9 +16,11 @@ class ParentNode(HTMLNode):
             raise ValueError("ParentNode must have a list of children (even if it's empty)")
         result_html = f"<{self.tag}{self.props_to_html()}>"
         end_tag = f"</{self.tag}>"
+
+        if isinstance(self.children, LeafNode):
+            return result_html + self.children.to_html() + end_tag
         for child in self.children:
             result_html += child.to_html()
-
         result_html += end_tag #add closing tag
         return result_html
 
