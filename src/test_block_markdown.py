@@ -139,3 +139,37 @@ the **same** even with inline stuff
             html,
             "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff\n</code></pre></div>",
         )
+    def test_single_paragraph(self):
+        md = """
+This is **bolded** paragraph
+text in a p
+tag here
+"""
+
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        # print("\n🚨🚨🚨")
+        # print(f"n  {html}")
+        # print(f'g <div><p>This is <b>bolded</b> paragraph text in a p tag here</p><p>This is another paragraph with <i>italic</i> text and <code>code</code> here</p></div>')
+        # print("\n🚨🚨🚨")
+        self.assertEqual(
+            html,
+            "<div><p>This is <b>bolded</b> paragraph text in a p tag here</p></div>",
+        )
+    # def test_unordered_list(self):
+    # def test_ordered_list(self):
+    # def test_block_quote(self):
+    def test_headings(self):
+        md = """## heading 2
+        """
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        print("\n🚨🚨🚨")
+        print(f"n  {html}")
+
+        print("\n🚨🚨🚨")
+        self.assertIn("h2", html)
+        self.assertEqual(
+            html,
+            "<div><h2>heading 2</h2></div>"
+        )

@@ -35,6 +35,7 @@ def build_node(block_type, text):
             node = ParentNode("p", children)
         case BlockType.HEADING:
             heading_tag = get_heading_tag(text)
+            # text.lstrip(heading_tag)
             node = ParentNode(heading_tag, children)
         case BlockType.QUOTE:
             node = ParentNode("blockquote", children)
@@ -44,10 +45,7 @@ def build_node(block_type, text):
             node = ParentNode("ol", children)
         case BlockType.CODE:
             text_node = TextNode(cleaned_text.lstrip(), TextType.CODE)
-            # print(f"text_node {text_node}")
             html_node = text_node_to_html_node(text_node)
-            # print(f"html_node {html_node}")
-            # print(f"html_node_to_html {html_node.to_html()}")
             node = ParentNode("pre", html_node)
         case _:
             raise ValueError("Not a valid block_type")
