@@ -28,8 +28,8 @@ def copy_tree(from_dir, to_dir):
         shutil.copy(curr_dir_item, new_path)
 
 def publish_content():
-    static_dir = '../static' #from_dir
-    public_dir = '../public' #to_dir
+    static_dir = './static' #from_dir
+    public_dir = './public' #to_dir
 
     #delete first
     if os.path.exists(public_dir):
@@ -37,7 +37,7 @@ def publish_content():
 
     #remake it!
     if not os.path.exists(public_dir):
-        print(f"creating {public_dir}")
+        print(f"creating {public_dir[1:]}")
         os.mkdir(public_dir)
 
     #no to_dir. Yeet!
@@ -52,5 +52,5 @@ def publish_content():
     copy_tree(static_dir, public_dir)
 
 
-testing()
-publish_content()
+# testing()
+# publish_content()
