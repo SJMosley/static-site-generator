@@ -75,65 +75,9 @@ def split_nodes_logic(extraction_func, old_nodes, extracted_node_type=None):
 
 def split_nodes_image(old_nodes):
     return split_nodes_logic(extract_markdown_images, old_nodes, TextType.IMAGE)
-    # new_nodes = []
-    # # "This is text with a ![rick roll](https://i.imgur.com/aKaOqIh.gif) and ![obi wan](https://i.imgur.com/fJRm4Vk.jpeg)"
-
-    # for old_node in old_nodes:
-    #     #create a split_nodes to manage the nodes generated here
-    #     split_nodes = []
-
-    #     #extract images
-    #     current_text = old_node.text
-    #     images = extract_markdown_images(current_text)
-    #     if images == []:
-    #         new_nodes.append(old_node)
-    #         continue
-    #     for text, url in images:
-    #         img_delim = f"![{text}]({url})"
-    #         left, img, right = current_text.partition(img_delim)
-    #         if left != "":
-    #             split_nodes.append(TextNode(left, TextType.TEXT))
-    #         if img:
-    #             split_nodes.append(TextNode(text, TextType.IMAGE, url))
-    #         if right or right == "":
-    #             current_text = right
-    #     if current_text != "":
-    #         split_nodes.append(TextNode(current_text, TextType.TEXT))
-    #     new_nodes.extend(split_nodes)
-    # return new_nodes
 
 def split_nodes_link(old_nodes):
     return split_nodes_logic(extract_markdown_links, old_nodes, TextType.LINK)
-    # new_nodes = []
-
-    # for old_node in old_nodes:
-    #     split_nodes=[]
-
-    #     current_text = old_node.text
-    #     links = extract_markdown_links(current_text)
-    #     # print(f"🔗links {links}")
-    #     if links == []:
-    #         # print(f"old_node {old_node}")
-    #         new_nodes.append(old_node)
-    #         continue
-    #     for text, url in links:
-    #         link_delim = f"[{text}]({url})"
-    #         left, lnk, right = current_text.partition(link_delim)
-    #         # print(f"left {left}")
-    #         # print(f"img {lnk}")
-    #         # print(f"right {right}")
-
-    #         if left != "":
-    #             split_nodes.append(TextNode(left, TextType.TEXT))
-    #         if lnk:
-    #             split_nodes.append(TextNode(text, TextType.LINK, url))
-    #         if right or right == "":
-    #             current_text = right
-    #     if current_text != "":
-    #         split_nodes.append(TextNode(current_text, TextType.TEXT))
-    #     new_nodes.extend(split_nodes)
-
-    # return new_nodes
 
 def extract_markdown_images(text):
     pattern = r"!\[(.*?)\]\((.*?)\)"
