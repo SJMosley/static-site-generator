@@ -1,5 +1,5 @@
 import unittest
-from process_markdown import markdown_to_html_node, markdown_to_blocks, block_to_block_type, BlockType
+from process_markdown import markdown_to_html_node, markdown_to_blocks, block_to_block_type, BlockType, extract_title
 # from markdown_to_html import markdown_to_html_node
 
 class TestBlockMarkdown(unittest.TestCase):
@@ -200,3 +200,17 @@ this is paragraph text
             html,
             "<div><h2>heading 2</h2></div>"
         )
+
+    def test_title_extraction(self):
+        # print(extract_title("# HEADER\n## Subtitle")) #Works
+        # print(extract_title("## HEADER\n## Subtitle")) #Causes ValueError
+        #
+        good_md = "# HEADER\n## Subtitle"
+        bad_md = "## HEADER\n## Subtitle"
+        good_result = extract_title(good_md)
+        self.assertEqual(
+            good_result,
+            "HEADER"
+        )
+        with self.assertRaises(ValueError):
+            extract_title(bad_md)

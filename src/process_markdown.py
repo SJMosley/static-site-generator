@@ -52,6 +52,13 @@ def block_to_block_type(block):
         return BlockType.ORDERED_LIST
     return BlockType.PARAGRAPH
 
+def extract_title(md):
+    lines = md.split('\n')
+    for line in lines:
+        if line.startswith('# '):
+            return line[2:].strip()
+    raise ValueError("no header!")
+
 def markdown_to_html_node(md):
     blocks = markdown_to_blocks(md)
     nodes = []
@@ -99,7 +106,7 @@ def unordered_list_to_html_node(block):
         html_node = ParentNode("li", line_children)
         children.append(html_node)
     return ParentNode("ul", children)
-    
+
 def ordered_list_to_html_node(block):
     children = []
     lines = block.split('\n')
@@ -109,6 +116,7 @@ def ordered_list_to_html_node(block):
         html_node = ParentNode("li", line_children)
         children.append(html_node)
     return ParentNode("ol", children)
+
 def quote_to_html_node(block):
     lines = block.split('\n')
     new_lines = []
@@ -119,6 +127,7 @@ def quote_to_html_node(block):
     joined_lines = " ".join(new_lines)
     children = text_to_children(joined_lines)
     return ParentNode("blockquote", children)
+
 def code_to_html_node(block):
     if not block.startswith("```") or not block.endswith("```"):
             raise ValueError("invalid code block")
