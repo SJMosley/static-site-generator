@@ -15,8 +15,14 @@ def generate_page(from_path, template_path, destination_path, base_path):
 
     template = template.replace("{{ Title }}", title)
     template = template.replace("{{ Content }}", content)
+    print("\n🚨🚨🚨")
+    print(f"pre_href {template}")
     template = template.replace('href="/',f'href="{base_path}')
+    print(f"post_href {template}")
+    print(f"pre_src {template}")
     result_html = template.replace('src="/',f'src="{base_path}')
+    print(f"post_src {result_html}")
+    print("\n🚨🚨🚨")
     # print(template)
 
     #destination_path and making dirs
